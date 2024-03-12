@@ -1,5 +1,6 @@
-export interface User {
-    id : string ,
+import { BaseModel } from "./base/BaseModel";
+
+export interface User extends BaseModel<string> {
     userName : string,
     firstName : string,
     lastName : string,
@@ -8,13 +9,4 @@ export interface User {
     birthYear : number,
     identificationNumber : string,
     userClaims : []
-}
-
-export interface AddUserDto{
-    userName: string,
-    password: string,
-    firstName: string,
-    lastName: string,
-    identificationNumber:string,
-    birthYear: number
-}
+};

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAppDispatch} from '../../store/hooks'
-import { AddUserDto } from '../../models/User';
 import { addUsers } from '../../services/UserService';
+import { AddUserDto } from '../../dtos/AddUserDto';
 
 
 function UserAdd() {
@@ -13,24 +13,29 @@ function UserAdd() {
         lastName: "",
         identificationNumber: "",
         birthYear: 0,
-    })
+    });
     console.log(users);
     const setUserData = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsers({ ...users, [e.target.name]: e.target.value })
-
-        console.log(users)
-    }
+    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(addUsers(users));
-    }
+        setUsers({
+            userName: "",
+            password: "",
+            firstName: "",
+            lastName: "",
+            identificationNumber: "",
+            birthYear: 0,
+        });
+    };
 
     return (
         <div>
             <div className="container">
                 <div className="row justify-content-center">
-                    <div className='col-sm-5 border border-1 p-3 mt-2'>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label className="form-label">UserName</label>
@@ -56,9 +61,8 @@ function UserAdd() {
                                 <label className="form-label">BirthYear</label>
                                 <input type="text" name='birthYear' className="form-control" onChange={setUserData} />
                             </div>
-                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <button type="submit" className="btn btn-primary">Add</button>
                         </form>
-                    </div>
                 </div>
             </div>
         </div>
